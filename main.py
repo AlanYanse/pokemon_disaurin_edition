@@ -14,6 +14,14 @@ class Game:
         self.clock = pygame.time.Clock()
         #self.font = pygame.font.Font("Arial")
         self.running = True
+
+    def createTileMap(self):
+        for i , row in enumerate(tile_map):
+            for j , column in enumerate(row):
+                if column == "B":
+                    Block(self, j, i) # si en esa posición hay una "B" significa que es un bloque u obstáculo entonces lo instancia
+                if column == "P":
+                    Player(self, j, i) # si en esa posición hay una "P" significa que el jugador entonces lo instancia
     
     def new(self):
         # a new game starts
@@ -24,13 +32,13 @@ class Game:
         self.enemies = pygame.sprite.LayeredUpdates()
         self.attacks = pygame.sprite.LayeredUpdates()
 
-        self.player = Player(self, 1 , 2)
+        self.createTileMap()
 
     
     def events(self):
         # game loop events
         for event in pygame.event.get():
-            if event.type == pygame.quit:
+            if event.type == pygame.QUIT:
                 self.playing = False
                 self.running = False
 
@@ -80,5 +88,5 @@ while g.running:
     g.main()
     g.game_over()
 
-pygame.quit()
+pygame.QUIT()
 sys.exit()
