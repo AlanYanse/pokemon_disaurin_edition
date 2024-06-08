@@ -5,8 +5,9 @@ WIN_HEIGHT = 480
 
 
 # Constante de la capa del jugador
-PLAYER_LAYER = 2
-BLOCK_LAYER = 1
+PLAYER_LAYER = 3
+BLOCK_LAYER = 2
+GROUND_LAYER = 1
 
 #
 TILE_SIZE = 32

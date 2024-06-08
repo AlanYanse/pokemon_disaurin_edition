@@ -15,9 +15,13 @@ class Game:
         #self.font = pygame.font.Font("Arial")
         self.running = True
 
+        self.character_spritesheet = Spritesheet("src/img/character.png")
+        self.terrain_spritesheet = Spritesheet("src/img/terrain.png")
+
     def createTileMap(self):
         for i , row in enumerate(tile_map):
             for j , column in enumerate(row):
+                Ground(self, j, i)
                 if column == "B":
                     Block(self, j, i) # si en esa posición hay una "B" significa que es un bloque u obstáculo entonces lo instancia
                 if column == "P":
