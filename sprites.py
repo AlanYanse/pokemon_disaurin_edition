@@ -76,6 +76,12 @@ class Player(pygame.sprite.Sprite):
             self.y_change += PLAYER_SPEED
             self.facing = "down"
 
+    def collide_blocks(self, direction):
+        if direction == "x":
+            hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
+        if direction == "y":
+            pass
+
 class Block(pygame.sprite.Sprite):
 
     def __init__(self, game, x, y):
