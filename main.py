@@ -17,6 +17,7 @@ class Game:
 
         self.character_spritesheet = Spritesheet("src/img/character.png")
         self.terrain_spritesheet = Spritesheet("src/img/terrain.png")
+        self.enemy_spritesheet = Spritesheet("src/img/enemy.png")
 
     def createTileMap(self):
         for i , row in enumerate(tile_map):
@@ -24,6 +25,8 @@ class Game:
                 Ground(self, j, i)
                 if column == "B":
                     Block(self, j, i) # si en esa posición hay una "B" significa que es un bloque u obstáculo entonces lo instancia
+                if column == "E":
+                    Enemy(self, j, i) # si en esa posición hay una "E" significa que es un enemigo entonces lo instancia
                 if column == "P":
                     Player(self, j, i) # si en esa posición hay una "P" significa que el jugador entonces lo instancia
     
