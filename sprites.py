@@ -350,6 +350,10 @@ class Attack(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
 
         self.game = game
+        self._layer = PLAYER_LAYER
+        self.groups = self.game.all_sprites, self.game.attacks
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
         self.x = x
         self.y = y
         self.width = TILE_SIZE
@@ -404,7 +408,25 @@ class Attack(pygame.sprite.Sprite):
                          self.game.attack_spritesheet.get_sprite(128, 0, self.width, self.height)]
         
         if direction == "up":
-            self.image = up_animations[self.floor(self.animation_loop)]
+            self.image = up_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.5
+            if self.animation_loop >= 5:
+                self.kill()
+        if direction == "down":
+            self.image = down_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.5
+            if self.animation_loop >= 5:
+                self.kill()
+        if direction == "left":
+            self.image = left_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.5
+            if self.animation_loop >= 5:
+                self.kill()
+        if direction == "right":
+            self.image = right_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.5
+            if self.animation_loop >= 5:
+                self.kill()
             
 
 
