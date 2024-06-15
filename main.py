@@ -16,10 +16,11 @@ class Game:
         self.font = pygame.font.Font("src/fonts/Pokemon Solid.ttf", 32)
         self.running = True
 
+        # Cargando las hojas de sprites
         self.character_spritesheet = Spritesheet("src/img/character.png")
         self.terrain_spritesheet = Spritesheet("src/img/terrain.png")
         self.enemy_spritesheet = Spritesheet("src/img/enemy.png")
-
+        self.attack_spritesheet = Spritesheet("src/img/attack.png")
         self.intro_background = pygame.image.load("src/img/introbackground.png")
         self.go_background = pygame.image.load("src/img/gameover.png")
         
@@ -34,7 +35,7 @@ class Game:
                 if column == "E":
                     Enemy(self, j, i) # si en esa posición hay una "E" significa que es un enemigo entonces lo instancia
                 if column == "P":
-                    Player(self, j, i) # si en esa posición hay una "P" significa que el jugador entonces lo instancia
+                    self.player = Player(self, j, i) # si en esa posición hay una "P" significa que el jugador entonces lo instancia
     
     def new(self):
         # a new game starts
@@ -54,6 +55,19 @@ class Game:
             if event.type == pygame.QUIT:
                 self.playing = False
                 self.running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    if self.player.facing == "up":
+                        Attack(self, self.player.rect.x, self.player.rect.y - TILE_SIZE)
+                    if self.player.facing == "down":
+                        Attack(self, self.player.rect.x, self.player.rect.y + TILE_SIZE)
+                    if self.player.facing == "left":
+                        Attack(self, self.player.rect.x - TILE_SIZE, self.player.rect.y )
+                    if self.player.facing == "right":
+                        Attack(self, self.player.rect.x + TILE_SIZE, self.player.rect.y )
+
+
+            
 
 
     
@@ -109,11 +123,6 @@ class Game:
             self.screen.blit(restart_button.image, restart_button.rect)
             self.clock.tick(FPS)
             pygame.display.update()
-
-
-
-
-
 
 
 
