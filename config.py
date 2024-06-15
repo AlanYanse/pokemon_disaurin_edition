@@ -3,6 +3,10 @@
 WIN_WIDTH = 640
 WIN_HEIGHT = 480
 
+# Menú de inicio
+
+TITULO = "Din Din Dinov"
+
 
 # Constante de las capas
 PLAYER_LAYER = 4

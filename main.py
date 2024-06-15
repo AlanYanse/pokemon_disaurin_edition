@@ -131,7 +131,7 @@ class Game:
     def intro_screen(self):
         intro = True
 
-        title = self.font.render("Pokemon Disaurin Edition", True, BLACK)
+        title = self.font.render(TITULO, True, BLACK)
         title_rect = title.get_rect(x=10, y=10)
 
         play_button = Button(10, 50, 100, 50, WHITE, BLACK, "Play", 32)
