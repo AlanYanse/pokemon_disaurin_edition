@@ -131,31 +131,55 @@ class Game:
     def intro_screen(self):
         intro = True
 
-        title = self.font.render("Pokemon Disaurin Edition", True, BLACK)
-        title_rect = title.get_rect(x=10, y=10)
+        # Definir las opciones del menú
+        menu_options = ["Play", "Exit"]
+        selected_option = 0
 
-        play_button = Button(10, 50, 100, 50, WHITE, BLACK, "Play", 32)
+        # Definir la fuente
+        font = pygame.font.Font(None, 74)
 
+        # Función para dibujar el menú
+        def draw_menu():
+            self.screen.blit(self.intro_background, (0,0))
+            for i, option in enumerate(menu_options):
+                color = RED if i == selected_option else BLACK
+                text = font.render(option, True, color)
+                text_rect = text.get_rect(center=(WIN_WIDTH//2, WIN_HEIGHT//2 + i * 100 - 50))
+                self.screen.blit(text, text_rect)
+
+        
+        # Bucle principal
+        #running = True
         while intro:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     intro = False
-                    self.running = False
-            
-            mouse_pos = pygame.mouse.get_pos()
-            mouse_pressed = pygame.mouse.get_pressed()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        selected_option = (selected_option - 1) % len(menu_options)
+                    elif event.key == pygame.K_DOWN:
+                        selected_option = (selected_option + 1) % len(menu_options)
+                    elif event.key == pygame.K_RETURN:
+                        if selected_option == 0:
+                            print("Play selected")
+                            # Aquí puedes añadir la lógica para iniciar el juego
+                            intro = False
+                        elif selected_option == 1:
+                            intro = False
+                            pygame.quit()
+                            sys.exit()
+            # Dibujar el menú
+            draw_menu()
 
-            if play_button.is_pressed(mouse_pos, mouse_pressed):
-                intro = False
-            
-            self.screen.blit(self.intro_background, (0,0))
-            self.screen.blit(title, title_rect)
-            self.screen.blit(play_button.image, play_button.rect)
-            self.clock.tick(FPS)
-            pygame.display.update()
+            # Actualizar la pantalla
+            pygame.display.flip()
+
+            # Controlar la velocidad de cuadros por segundo
+            pygame.time.Clock().tick(FPS)
 
     
 
+#=======================================================================================================
 
 g = Game()
 
